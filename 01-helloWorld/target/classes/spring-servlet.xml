@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<bean class="com.qxf.controller.HelloController" name="/hello"/>-->
+    <!--&lt;!&ndash;这个是处理器映射器，这种方式，请求地址其实就是一个 Bean 的名字，然后根据这个 bean 的名字查找对应的处理器&ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" id="handlerMapping">-->
+        <!--<property name="beanName" value="/hello"/>-->
+    <!--</bean>-->
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" id="handlerAdapter"/>-->
+
+    <!-- 注解驱动 -->
+    <mvc:annotation-driven/>
+
+    <!--组件扫描-->
+    <context:component-scan base-package="com.qxf.controller"></context:component-scan>
+
+    <!--视图解析器-->
+    <!--
+    需要配置解析jsp的视图解析器
+    jsp解析，默认使用jstl标签解析
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>

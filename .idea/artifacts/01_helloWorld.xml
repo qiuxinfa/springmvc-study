@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact name="01-helloWorld">
+    <output-path>$PROJECT_DIR$/out/artifacts/01_helloWorld</output-path>
+    <root id="root" />
+  </artifact>
+</component>

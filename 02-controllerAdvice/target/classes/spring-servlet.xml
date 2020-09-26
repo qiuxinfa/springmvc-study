@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 注解驱动 -->
+    <mvc:annotation-driven validator="validatorFactoryBean">
+        <mvc:message-converters>
+            <ref bean="httpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--组件扫描-->
+    <context:component-scan base-package="com.qxf"></context:component-scan>
+
+    <!--参数校验-->
+    <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    </bean>
+
+    <!--视图解析器-->
+    <!--
+    需要配置解析jsp的视图解析器
+    jsp解析，默认使用jstl标签解析
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- fastjson的HttpMessageConverter配置-->
+    <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" id="httpMessageConverter">
+        <property name="fastJsonConfig">
+            <bean class="com.alibaba.fastjson.support.config.FastJsonConfig">
+                <property name="dateFormat" value="yyyy-MM-dd"/>
+            </bean>
+        </property>
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=utf-8</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
